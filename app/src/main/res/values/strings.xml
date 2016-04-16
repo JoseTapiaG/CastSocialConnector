@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2014 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">Cast Social Connector</string>
+    <string name="app_id">CA1E48C2</string>
+    <string name="namespace">urn:x-cast:com.google.cast.sample.helloworld</string>
+    <string name="next_namespace">urn:x-cast:com.jose.cast.sample.next</string>
+    <string name="prev_namespace">urn:x-cast:com.jose.cast.sample.prev</string>
+    <string name="send_message_select_contact_namespace">urn:x-cast:com.jose.cast.sample.selectContact</string>
+    <string name="send_message">urn:x-cast:com.jose.cast.sample.send_message</string>
+    <string name="album_select_contact_namespace">urn:x-cast:com.jose.cast.sample.albumSelectContact</string>
+    <string name="send_photos">urn:x-cast:com.jose.cast.sample.send_photos</string>
+    <string name="next_photo_namespace">urn:x-cast:com.jose.cast.sample.next_photo</string>
+    <string name="prev_photo_namespace">urn:x-cast:com.jose.cast.sample.prev_photo</string>
+    <string name="album_photo_namespace">urn:x-cast:com.jose.cast.sample.album_photo</string>
+    <string name="change_to_album_photo_namespace">urn:x-cast:com.jose.cast.sample.change_to_album_photo</string>
+    <string name="photo_seen_namespace">urn:x-cast:com.jose.cast.sample.photo_seen</string>
+    <string name="action_settings">Settings</string>
+    <string name="message_to_cast">Message to Cast&#8230;</string>
+    <string name="media_route_menu_title">Play on&#8230;</string>
+    <string name="instructions">Talk to me</string>
+
+    <!-- Main Activity -->
+    <string name="title_activity_main">Social Connector</string>
+
+    <!-- Instagram -->
+    <string name="instagram_id">a22e679b16d34061836f7bb24324fab5</string>
+    <string name="instagram_redirect_uri">socialconnector://oauth/callback/instagram/</string>
+    <string name="instagram_scheme">socialconnector</string>
+    <string name="instagram_user_id">instagram_id</string>
+    <string name="instagram_token">instagram_token</string>
+    <string name="instagram_username">instagram_username</string>
+    <string name="instagram_last_seen_photo">instagram_last_seen_photo</string>
+</resources>
