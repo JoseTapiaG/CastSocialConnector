@@ -46,6 +46,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.jose.castsocialconnector.R;
 import com.jose.castsocialconnector.castMessagesCallback.ContactsSendMessageCallBack;
+import com.jose.castsocialconnector.castMessagesCallback.PagePhotoReadyMessageCallBack;
 import com.jose.castsocialconnector.instagram.InstagramApi;
 import com.jose.castsocialconnector.photo.NewPhotosService;
 import com.jose.castsocialconnector.xml.XmlContact;
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
     // Contacts
     public static ArrayList<XmlContact> xmlContacts;
     public static XmlContact userContact;
+    public static XmlContact currentContact;
 
     // Instagram
     public static String instagramToken;
@@ -91,11 +93,11 @@ public class MainActivity extends AppCompatActivity {
 
     // SharedPreferences
     private SharedPreferences settings;
-    private SharedPreferences.Editor editor;
 
     // new photos
     private NewPhotosService newPhotosService;
     public static ScheduledFuture newPhotosSchedule;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -331,6 +333,7 @@ public class MainActivity extends AppCompatActivity {
                                                             mHelloWorldChannel);
 
                                                     ContactsSendMessageCallBack contactsSendMessageCallBack = new ContactsSendMessageCallBack(MainActivity.this);
+                                                    PagePhotoReadyMessageCallBack pagePhotoReadyMessageCallBack = new PagePhotoReadyMessageCallBack(MainActivity.this);
 
                                                     Cast.CastApi.setMessageReceivedCallbacks(
                                                             mApiClient,
@@ -341,6 +344,11 @@ public class MainActivity extends AppCompatActivity {
                                                             mApiClient,
                                                             getString(R.string.photo_seen_namespace)
                                                             , newPhotosService);
+
+                                                    Cast.CastApi.setMessageReceivedCallbacks(
+                                                            mApiClient,
+                                                            pagePhotoReadyMessageCallBack.getNamespace()
+                                                            , pagePhotoReadyMessageCallBack);
 
                                                 } catch (IOException e) {
                                                     Log.e(TAG, "Exception while creating channel",
@@ -400,6 +408,9 @@ public class MainActivity extends AppCompatActivity {
                             Cast.CastApi.removeMessageReceivedCallbacks(
                                     mApiClient,
                                     getString(R.string.photo_seen_namespace));
+                            Cast.CastApi.removeMessageReceivedCallbacks(
+                                    mApiClient,
+                                    getString(R.string.album_photos_ready));
                             mHelloWorldChannel = null;
                         }
                     } catch (IOException e) {

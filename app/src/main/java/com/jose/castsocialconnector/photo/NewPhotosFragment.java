@@ -32,13 +32,7 @@ public class NewPhotosFragment extends PhotosFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        changePage();
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    protected String getNameSpace() {
-        return getString(R.string.album_photo_namespace);
     }
 
     @Override
@@ -62,22 +56,5 @@ public class NewPhotosFragment extends PhotosFragment {
         }
 
         return notSeenPhotos;
-    }
-
-    private void changePage() {
-        if (((MainActivity) getActivity()).getmApiClient() != null) {
-            try {
-                Cast.CastApi.sendMessage(((MainActivity) getActivity()).getmApiClient(),
-                        getString(R.string.change_to_album_photo_namespace), ".").setResultCallback(
-                        new ResultCallback<Status>() {
-                            @Override
-                            public void onResult(Status result) {
-                                if (!result.isSuccess()) {
-                                }
-                            }
-                        });
-            } catch (Exception e) {
-            }
-        }
     }
 }

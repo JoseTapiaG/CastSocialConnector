@@ -19,7 +19,7 @@ import com.jose.castsocialconnector.xml.XmlContact;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public abstract class PhotosFragment extends Fragment implements Cast.MessageReceivedCallback {
+public abstract class PhotosFragment extends Fragment{
 
     protected View mainView;
 
@@ -29,15 +29,7 @@ public abstract class PhotosFragment extends Fragment implements Cast.MessageRec
         Gson gson = new Gson();
         String json = gson.toJson(getPhotos());
         sendPhotos(json);
-        try {
-            Cast.CastApi.setMessageReceivedCallbacks(((MainActivity) getActivity()).getmApiClient(),
-                    getNameSpace(), this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
-
-    protected abstract String getNameSpace();
 
     protected abstract ArrayList<PhotoJSON> getPhotos();
 
@@ -119,7 +111,4 @@ public abstract class PhotosFragment extends Fragment implements Cast.MessageRec
             }
         }
     }
-
-    @Override
-    public void onMessageReceived(CastDevice castDevice, String s, String s1) {}
 }

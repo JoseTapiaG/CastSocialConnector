@@ -44,7 +44,9 @@ public class MenuFragment extends Fragment {
         ((Button) view.findViewById(R.id.new_photos)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeFragment(new NewPhotosFragment());
+                TransitionFragment fragment = new TransitionFragment();
+                fragment.setPhotoFragment("new");
+                changeFragment(fragment);
             }
         });
 

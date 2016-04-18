@@ -18,10 +18,18 @@
     <string name="app_name">Cast Social Connector</string>
     <string name="app_id">CA1E48C2</string>
     <string name="namespace">urn:x-cast:com.google.cast.sample.helloworld</string>
+
+    <!--Cast-->
+    <string name="media_route_menu_title">Play on&#8230;</string>
+    <string name="message_to_cast">Message to Cast&#8230;</string>
+
+    <!--Contacts-->
     <string name="next_namespace">urn:x-cast:com.jose.cast.sample.next</string>
     <string name="prev_namespace">urn:x-cast:com.jose.cast.sample.prev</string>
     <string name="send_message_select_contact_namespace">urn:x-cast:com.jose.cast.sample.selectContact</string>
     <string name="send_message">urn:x-cast:com.jose.cast.sample.send_message</string>
+
+    <!--Photos-->
     <string name="album_select_contact_namespace">urn:x-cast:com.jose.cast.sample.albumSelectContact</string>
     <string name="send_photos">urn:x-cast:com.jose.cast.sample.send_photos</string>
     <string name="next_photo_namespace">urn:x-cast:com.jose.cast.sample.next_photo</string>
@@ -29,10 +37,7 @@
     <string name="album_photo_namespace">urn:x-cast:com.jose.cast.sample.album_photo</string>
     <string name="change_to_album_photo_namespace">urn:x-cast:com.jose.cast.sample.change_to_album_photo</string>
     <string name="photo_seen_namespace">urn:x-cast:com.jose.cast.sample.photo_seen</string>
-    <string name="action_settings">Settings</string>
-    <string name="message_to_cast">Message to Cast&#8230;</string>
-    <string name="media_route_menu_title">Play on&#8230;</string>
-    <string name="instructions">Talk to me</string>
+    <string name="album_photos_ready">urn:x-cast:com.jose.cast.sample.album_photo_ready</string>
 
     <!-- Main Activity -->
     <string name="title_activity_main">Social Connector</string>

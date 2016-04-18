@@ -28,13 +28,8 @@ public class AlbumPhotosFragment extends PhotosFragment {
     XmlContact contacto;
 
     @Override
-    protected String getNameSpace() {
-        return getString(R.string.album_photo_namespace);
-    }
-
-    @Override
     protected ArrayList<PhotoJSON> getPhotos() {
-        contacto = (XmlContact) getArguments().getSerializable("contact");
+        contacto = ((MainActivity) getActivity()).currentContact;
 
         URL = "https://api.instagram.com/v1/users/" + contacto.getInstagramUser().getId() + "/media/recent/"
                 + "?access_token=" + MainActivity.instagramToken;
