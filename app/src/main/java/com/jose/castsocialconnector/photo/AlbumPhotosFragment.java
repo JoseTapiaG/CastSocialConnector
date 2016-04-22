@@ -4,6 +4,7 @@ import android.os.StrictMode;
 import android.util.Log;
 
 import com.jose.castsocialconnector.R;
+import com.jose.castsocialconnector.contacts.AlbumContactsFragment;
 import com.jose.castsocialconnector.main.MainActivity;
 import com.jose.castsocialconnector.xml.XmlContact;
 
@@ -81,5 +82,10 @@ public class AlbumPhotosFragment extends PhotosFragment {
             e.printStackTrace();
         }
         return localPhotoList;
+    }
+
+    @Override
+    protected void onBackPressed() {
+        changeFragment(new AlbumContactsFragment());
     }
 }

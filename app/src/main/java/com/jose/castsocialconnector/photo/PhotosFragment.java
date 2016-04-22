@@ -13,13 +13,14 @@ import com.google.android.gms.common.api.Status;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jose.castsocialconnector.R;
+import com.jose.castsocialconnector.main.BaseFragment;
 import com.jose.castsocialconnector.main.MainActivity;
 import com.jose.castsocialconnector.xml.XmlContact;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public abstract class PhotosFragment extends Fragment{
+public abstract class PhotosFragment extends BaseFragment{
 
     protected View mainView;
 

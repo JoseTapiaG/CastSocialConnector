@@ -176,7 +176,7 @@ public class InstagramApi {
             editor.putLong(this.context.getString(R.string.instagram_user_id),
                     Long.parseLong(user.getString("id")));
             editor.apply();
-            MainActivity.userContact.setInstagramUser(new InstagramUser(user));
+            activity.getUserContact().setInstagramUser(new InstagramUser(user));
             Log.d(TAG, "User found, id: " + user.getString("id"));
             long id_int = settings.getLong(
                     this.context.getString(R.string.instagram_user_id),

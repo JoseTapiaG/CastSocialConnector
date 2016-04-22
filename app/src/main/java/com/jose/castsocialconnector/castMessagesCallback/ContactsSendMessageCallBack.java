@@ -5,7 +5,7 @@ import android.app.FragmentTransaction;
 
 import com.google.android.gms.cast.CastDevice;
 import com.jose.castsocialconnector.R;
-import com.jose.castsocialconnector.sendMessage.CreateMessageFragment;
+import com.jose.castsocialconnector.message.CreateMessageFragment;
 
 public class ContactsSendMessageCallBack extends BaseCastMessageCallback {
 

@@ -9,6 +9,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.jose.castsocialconnector.R;
 import com.jose.castsocialconnector.main.MainActivity;
+import com.jose.castsocialconnector.main.MenuFragment;
 import com.jose.castsocialconnector.xml.XmlContact;
 
 import org.json.JSONArray;
@@ -56,5 +57,10 @@ public class NewPhotosFragment extends PhotosFragment {
         }
 
         return notSeenPhotos;
+    }
+
+    @Override
+    protected void onBackPressed() {
+        changeFragment(new MenuFragment());
     }
 }

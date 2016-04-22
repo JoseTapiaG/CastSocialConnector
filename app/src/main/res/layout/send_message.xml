@@ -13,6 +13,7 @@
         android:background="@drawable/voice_button"/>
 
     <Button
+        android:id="@+id/sendButton"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:text="Enviar"

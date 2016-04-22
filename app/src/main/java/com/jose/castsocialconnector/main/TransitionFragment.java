@@ -15,7 +15,7 @@ import com.jose.castsocialconnector.R;
 /**
  * Created by Jose Manuel on 18/04/2016.
  */
-public class TransitionFragment extends Fragment{
+public class TransitionFragment extends BaseFragment{
 
     private String photoFragment;
 

@@ -19,6 +19,7 @@ public class XmlContact implements Serializable{
 
     private long id;
 
+    @Expose
     private String email;
     private String instagram;
     private InstagramUser instagramUser;

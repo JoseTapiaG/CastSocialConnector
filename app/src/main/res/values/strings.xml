@@ -23,11 +23,16 @@
     <string name="media_route_menu_title">Play on&#8230;</string>
     <string name="message_to_cast">Message to Cast&#8230;</string>
 
+    <!--Message-->
+    <string name="send_mail">urn:x-cast:com.jose.cast.sample.send_mail</string>
+    <string name="send_message_subject">[Social Connector] Nuevo mensaje</string>
+    <string name="send_message">urn:x-cast:com.jose.cast.sample.send_message</string>
+
+
     <!--Contacts-->
     <string name="next_namespace">urn:x-cast:com.jose.cast.sample.next</string>
     <string name="prev_namespace">urn:x-cast:com.jose.cast.sample.prev</string>
     <string name="send_message_select_contact_namespace">urn:x-cast:com.jose.cast.sample.selectContact</string>
-    <string name="send_message">urn:x-cast:com.jose.cast.sample.send_message</string>
 
     <!--Photos-->
     <string name="album_select_contact_namespace">urn:x-cast:com.jose.cast.sample.albumSelectContact</string>

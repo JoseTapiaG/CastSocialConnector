@@ -16,6 +16,8 @@
 
 package com.jose.castsocialconnector.main;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
@@ -47,7 +49,9 @@ import com.google.android.gms.common.api.Status;
 import com.jose.castsocialconnector.R;
 import com.jose.castsocialconnector.castMessagesCallback.ContactsSendMessageCallBack;
 import com.jose.castsocialconnector.castMessagesCallback.PagePhotoReadyMessageCallBack;
+import com.jose.castsocialconnector.castMessagesCallback.SendMailMessageCallBack;
 import com.jose.castsocialconnector.instagram.InstagramApi;
+import com.jose.castsocialconnector.message.authentication.OnTokenAcquired;
 import com.jose.castsocialconnector.photo.NewPhotosService;
 import com.jose.castsocialconnector.xml.XmlContact;
 import com.jose.castsocialconnector.xml.XmlParser;
@@ -82,10 +86,16 @@ public class MainActivity extends AppCompatActivity {
     private boolean mWaitingForReconnect;
     private String mSessionId;
 
+    // email settings
+    public String oauthToken;
+
+    // messages
+    private AccountManager accountManager;
+
     // Contacts
     public static ArrayList<XmlContact> xmlContacts;
-    public static XmlContact userContact;
-    public static XmlContact currentContact;
+    public XmlContact userContact;
+    public XmlContact currentContact;
 
     // Instagram
     public static String instagramToken;
@@ -120,6 +130,11 @@ public class MainActivity extends AppCompatActivity {
         // set contacts from xml file
         xmlContacts = XmlParser.parseContactsXml();
         userContact = XmlParser.parseOwnerXml();
+
+        // connect to email
+        accountManager = AccountManager.get(this);
+        Account[] accounts = accountManager.getAccountsByType("com.google");
+        onAccountSelected(accounts[0]);
 
         // instagram
         instagramApi = new InstagramApi(this);
@@ -161,6 +176,12 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void onAccountSelected(final Account account) {
+        userContact.setEmail(account.name);
+        accountManager.getAuthToken(account, "oauth2:https://mail.google.com/", null, this,
+                new OnTokenAcquired(this, account), null);
     }
 
     private void getInstagramInfo() {
@@ -334,6 +355,7 @@ public class MainActivity extends AppCompatActivity {
 
                                                     ContactsSendMessageCallBack contactsSendMessageCallBack = new ContactsSendMessageCallBack(MainActivity.this);
                                                     PagePhotoReadyMessageCallBack pagePhotoReadyMessageCallBack = new PagePhotoReadyMessageCallBack(MainActivity.this);
+                                                    SendMailMessageCallBack sendMailMessageCallBack = new SendMailMessageCallBack(MainActivity.this, userContact.getEmail(), oauthToken);
 
                                                     Cast.CastApi.setMessageReceivedCallbacks(
                                                             mApiClient,
@@ -349,6 +371,11 @@ public class MainActivity extends AppCompatActivity {
                                                             mApiClient,
                                                             pagePhotoReadyMessageCallBack.getNamespace()
                                                             , pagePhotoReadyMessageCallBack);
+
+                                                    Cast.CastApi.setMessageReceivedCallbacks(
+                                                            mApiClient,
+                                                            sendMailMessageCallBack.getNamespace()
+                                                            , sendMailMessageCallBack);
 
                                                 } catch (IOException e) {
                                                     Log.e(TAG, "Exception while creating channel",
@@ -411,6 +438,9 @@ public class MainActivity extends AppCompatActivity {
                             Cast.CastApi.removeMessageReceivedCallbacks(
                                     mApiClient,
                                     getString(R.string.album_photos_ready));
+                            Cast.CastApi.removeMessageReceivedCallbacks(
+                                    mApiClient,
+                                    getString(R.string.send_mail));
                             mHelloWorldChannel = null;
                         }
                     } catch (IOException e) {
@@ -456,5 +486,19 @@ public class MainActivity extends AppCompatActivity {
 
     public NewPhotosService getNewPhotosService() {
         return newPhotosService;
+    }
+
+    public void setOauthToken(String oauthToken) {
+        this.oauthToken = oauthToken;
+    }
+
+    public XmlContact getUserContact() {
+        return userContact;
+    }
+
+    @Override
+    public void onBackPressed() {
+        BaseFragment f = (BaseFragment) getFragmentManager().findFragmentById(R.id.fragment_container);
+        f.onBackPressed();
     }
 }

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by Jose Manuel on 06/04/2016.
  */
-public class MenuFragment extends Fragment {
+public class MenuFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,10 +61,8 @@ public class MenuFragment extends Fragment {
 
     }
 
-    private void changeFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment).addToBackStack("");
-        transaction.commit();
+    @Override
+    protected void onBackPressed() {
+        getActivity().finish();
     }
 }

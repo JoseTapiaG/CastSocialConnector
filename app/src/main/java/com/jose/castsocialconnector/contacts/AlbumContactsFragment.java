@@ -1,16 +1,13 @@
 package com.jose.castsocialconnector.contacts;
 
-import android.app.FragmentTransaction;
-import android.os.Bundle;
-
 import com.google.android.gms.cast.Cast;
 import com.google.android.gms.cast.CastDevice;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.jose.castsocialconnector.R;
 import com.jose.castsocialconnector.main.MainActivity;
+import com.jose.castsocialconnector.main.MenuFragment;
 import com.jose.castsocialconnector.main.TransitionFragment;
-import com.jose.castsocialconnector.photo.AlbumPhotosFragment;
 import com.jose.castsocialconnector.xml.XmlContact;
 
 import java.util.ArrayList;
@@ -65,8 +62,11 @@ public class AlbumContactsFragment extends ContactsFragment {
         //cambio de fragment
         TransitionFragment fragment = new TransitionFragment();
         fragment.setPhotoFragment("album");
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment).addToBackStack("");
-        transaction.commit();
+        changeFragment(fragment);
+    }
+
+    @Override
+    protected void onBackPressed() {
+        changeFragment(new MenuFragment());
     }
 }

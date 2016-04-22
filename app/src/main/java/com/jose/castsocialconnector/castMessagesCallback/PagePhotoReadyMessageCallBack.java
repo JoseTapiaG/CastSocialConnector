@@ -39,7 +39,7 @@ public class PagePhotoReadyMessageCallBack extends BaseCastMessageCallback {
     private void changeFragment(Fragment fragment) {
         FragmentManager fragmentManager = activity.getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment).addToBackStack("");
+        transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
     }
 }
