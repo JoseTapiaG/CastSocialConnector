@@ -55,7 +55,7 @@ public abstract class PhotosFragment extends BaseFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mainView = inflater.inflate(R.layout.contacts, container, false);
+        mainView = inflater.inflate(R.layout.photos, container, false);
 
         mainView.findViewById(R.id.next).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,12 +69,6 @@ public abstract class PhotosFragment extends BaseFragment{
                 prev();
             }
         });
-        mainView.findViewById(R.id.select).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
         return mainView;
 
     }

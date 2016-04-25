@@ -18,6 +18,7 @@ package com.jose.castsocialconnector.main;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
@@ -149,7 +150,13 @@ public class MainActivity extends AppCompatActivity {
         startCheckNewDataService();
 
         // default fragment
-        MenuFragment menuFragment = new MenuFragment();
+        showConnectWarningFragment();
+    }
+
+    private void showConnectWarningFragment() {
+        ConnectWarningFragment menuFragment = new ConnectWarningFragment();
+        menuFragment.setmMediaRouteSelector(mMediaRouteSelector);
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragment_container, menuFragment).addToBackStack("");
@@ -248,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "onRouteUnselected: info=" + info);
             teardown(false);
             mSelectedDevice = null;
+            showConnectWarningFragment();
         }
     }
 
@@ -377,6 +385,13 @@ public class MainActivity extends AppCompatActivity {
                                                             sendMailMessageCallBack.getNamespace()
                                                             , sendMailMessageCallBack);
 
+                                                    MenuFragment menuFragment = new MenuFragment();
+                                                    FragmentManager fragmentManager = getFragmentManager();
+                                                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                                                    transaction.replace(R.id.fragment_container, menuFragment).addToBackStack("");
+                                                    transaction.commit();
+
+
                                                 } catch (IOException e) {
                                                     Log.e(TAG, "Exception while creating channel",
                                                             e);
@@ -398,6 +413,7 @@ public class MainActivity extends AppCompatActivity {
         public void onConnectionSuspended(int cause) {
             Log.d(TAG, "onConnectionSuspended");
             mWaitingForReconnect = true;
+            showConnectWarningFragment();
         }
     }
 
@@ -498,7 +514,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        BaseFragment f = (BaseFragment) getFragmentManager().findFragmentById(R.id.fragment_container);
-        f.onBackPressed();
+        Fragment f = getFragmentManager().findFragmentById(R.id.fragment_container);
+        if (f instanceof BaseFragment)
+            ((BaseFragment) f).onBackPressed();
+        else
+            super.onBackPressed();
     }
 }

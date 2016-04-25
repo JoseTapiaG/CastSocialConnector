@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="2">
+        android:layout_weight="2"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/prev"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="20dp"
-            android:text="Prev"/>
+            android:text="Prev"
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/next"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="20dp"
-            android:text="Next"/>
+            android:text="Next"
+            android:textSize="20dp" />
 
     </LinearLayout>
 
-    <Button
+    <LinearLayout
         android:id="@+id/select"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3"
-        android:textSize="20dp"
-        android:text="Select"/>
+        android:orientation="horizontal" />
 
 </LinearLayout>
