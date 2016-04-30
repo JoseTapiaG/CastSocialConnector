@@ -22,10 +22,12 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -34,8 +36,11 @@ import android.support.v7.media.MediaRouteSelector;
 import android.support.v7.media.MediaRouter;
 import android.support.v7.media.MediaRouter.RouteInfo;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.cast.ApplicationMetadata;
 import com.google.android.gms.cast.Cast;
@@ -53,6 +58,7 @@ import com.jose.castsocialconnector.castMessagesCallback.PagePhotoReadyMessageCa
 import com.jose.castsocialconnector.castMessagesCallback.SendMailMessageCallBack;
 import com.jose.castsocialconnector.instagram.InstagramApi;
 import com.jose.castsocialconnector.message.authentication.OnTokenAcquired;
+import com.jose.castsocialconnector.message.receive.GetEmailService;
 import com.jose.castsocialconnector.photo.NewPhotosService;
 import com.jose.castsocialconnector.xml.XmlContact;
 import com.jose.castsocialconnector.xml.XmlParser;
@@ -92,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     // messages
     private AccountManager accountManager;
+    private GetEmailService getEmailService;
 
     // Contacts
     public static ArrayList<XmlContact> xmlContacts;
@@ -110,10 +117,17 @@ public class MainActivity extends AppCompatActivity {
     public static ScheduledFuture newPhotosSchedule;
 
 
+    // font-families
+    Typeface typeFaceNormal;
+    Typeface typeFaceBold;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        typeFaceNormal = Typeface.createFromAsset(getAssets(), "font/DroidSans.ttf");
+        typeFaceBold = Typeface.createFromAsset(getAssets(), "font/DroidSans-Bold.ttf");
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(
@@ -133,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
         userContact = XmlParser.parseOwnerXml();
 
         // connect to email
+        getEmailService = new GetEmailService(this);
         accountManager = AccountManager.get(this);
         Account[] accounts = accountManager.getAccountsByType("com.google");
         onAccountSelected(accounts[0]);
@@ -151,6 +166,26 @@ public class MainActivity extends AppCompatActivity {
 
         // default fragment
         showConnectWarningFragment();
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        changeActionBarFont();
+    }
+
+
+
+    private void changeActionBarFont() {
+        this.getSupportActionBar().setDisplayShowCustomEnabled(true);
+        this.getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        LayoutInflater inflator = LayoutInflater.from(this);
+        View v = inflator.inflate(R.layout.action_bar, null);
+
+        ((TextView) v.findViewById(R.id.title)).setText(this.getTitle());
+        ((TextView) v.findViewById(R.id.title)).setTypeface(typeFaceNormal);
+        this.getSupportActionBar().setCustomView(v);
     }
 
     private void showConnectWarningFragment() {
@@ -508,8 +543,16 @@ public class MainActivity extends AppCompatActivity {
         this.oauthToken = oauthToken;
     }
 
+    public String getOauthToken() {
+        return oauthToken;
+    }
+
     public XmlContact getUserContact() {
         return userContact;
+    }
+
+    public GetEmailService getGetEmailService() {
+        return getEmailService;
     }
 
     @Override

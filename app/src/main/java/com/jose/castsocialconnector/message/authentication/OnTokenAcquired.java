@@ -7,6 +7,7 @@ import android.accounts.AccountManagerFuture;
 import android.os.Bundle;
 
 import com.jose.castsocialconnector.main.MainActivity;
+import com.jose.castsocialconnector.message.receive.GetEmailService;
 
 /**
  * Created by Jose Manuel on 22/04/2016.
@@ -27,7 +28,8 @@ public class OnTokenAcquired implements AccountManagerCallback<Bundle> {
             Bundle bundle = result.getResult();
             activity.setOauthToken(bundle.getString(AccountManager.KEY_AUTHTOKEN));
             activity.getUserContact().setEmail(account.name);
-//            new CreateImapStore(MainActivity.this, emailAccount, oauthToken).execute();
+            activity.getGetEmailService().connect(account.name,  activity.getOauthToken());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
