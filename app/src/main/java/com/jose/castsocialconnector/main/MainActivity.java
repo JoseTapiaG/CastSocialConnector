@@ -22,6 +22,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -129,10 +130,6 @@ public class MainActivity extends AppCompatActivity {
         typeFaceNormal = Typeface.createFromAsset(getAssets(), "font/DroidSans.ttf");
         typeFaceBold = Typeface.createFromAsset(getAssets(), "font/DroidSans-Bold.ttf");
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setBackgroundDrawable(new ColorDrawable(
-                getResources().getColor(android.R.color.transparent)));
-
         // Configure Cast device discovery
         mMediaRouter = MediaRouter.getInstance(getApplicationContext());
         mMediaRouteSelector = new MediaRouteSelector.Builder()
@@ -171,12 +168,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        changeActionBarFont();
+        setActionBarStyle();
     }
 
+    private void setActionBarStyle() {
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00B2A6")));
 
-    private void changeActionBarFont() {
         this.getSupportActionBar().setDisplayShowCustomEnabled(true);
         this.getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -184,7 +183,8 @@ public class MainActivity extends AppCompatActivity {
         View v = inflator.inflate(R.layout.action_bar, null);
 
         ((TextView) v.findViewById(R.id.title)).setText(this.getTitle());
-        ((TextView) v.findViewById(R.id.title)).setTypeface(typeFaceNormal);
+        ((TextView) v.findViewById(R.id.title)).setTypeface(typeFaceBold);
+        ((TextView) v.findViewById(R.id.title)).setTextColor(Color.parseColor("#FFFFFF"));
         this.getSupportActionBar().setCustomView(v);
     }
 

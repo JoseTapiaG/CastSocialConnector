@@ -3,7 +3,9 @@ package com.jose.castsocialconnector.main;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import com.jose.castsocialconnector.R;
 import com.jose.castsocialconnector.contacts.AlbumContactsFragment;
 import com.jose.castsocialconnector.contacts.SendMessageContactsFragment;
 import com.jose.castsocialconnector.photo.NewPhotosFragment;
+import com.jose.castsocialconnector.tutorial.MenuTutorial;
 import com.jose.castsocialconnector.xml.XmlContact;
 
 import java.util.ArrayList;
@@ -58,7 +61,16 @@ public class MenuFragment extends BaseFragment {
         });
 
         return view;
+    }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        if(settings.getBoolean("menuTutorial", true)){
+            MenuTutorial menuTutorial = new MenuTutorial(this);
+            menuTutorial.start();
+        }
     }
 
     @Override

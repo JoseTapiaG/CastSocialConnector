@@ -1,6 +1,7 @@
 package com.jose.castsocialconnector.main;
 
 import android.app.Fragment;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.MediaRouteButton;
@@ -8,6 +9,7 @@ import android.support.v7.media.MediaRouteSelector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.jose.castsocialconnector.R;
 
@@ -25,8 +27,14 @@ public class ConnectWarningFragment extends Fragment {
 
         MediaRouteButton mediaRouteButton= (MediaRouteButton) view.findViewById(R.id.media_route_button);
         mediaRouteButton.setRouteSelector(mMediaRouteSelector);
-
+        setTextsStyle(view);
         return view;
+    }
+
+    private void setTextsStyle(View view) {
+        Typeface typeface = ((MainActivity) getActivity()).typeFaceNormal;
+        ((TextView) view.findViewById(R.id.connectText1)).setTypeface(typeface);
+        ((TextView) view.findViewById(R.id.connectText2)).setTypeface(typeface);
     }
 
     public void setmMediaRouteSelector(MediaRouteSelector mMediaRouteSelector) {
