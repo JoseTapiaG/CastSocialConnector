@@ -30,6 +30,25 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat">
+        <item name="android:buttonStyle">@style/ButtonColor</item>
+        <item name="android:imageButtonStyle">@style/ImageButtonAppTheme</item>
+    </style>
+
+    <style name="ImageButtonAppTheme" parent="android:Widget.Holo.Light.ImageButton">
+        <item name="android:background">@drawable/apptheme_btn_default_holo_light</item>
+    </style>
+
+    <style name="defaultBotton">
+        <item name="android:layout_margin">@dimen/button_margin</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">30dp</item>
+    </style>
+
+    <style name="ButtonColor" parent="@android:style/Widget.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/apptheme_btn_default_holo_light</item><!-- only way to change this is to change the src image -->
     </style>
 
     <style name="CustomShowcaseTheme" parent="ShowcaseView.Light">

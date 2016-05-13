@@ -13,23 +13,17 @@
 
         <Button
             android:id="@+id/send_message"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/defaultBotton"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_weight="1"
-            android:text="Enviar Mensaje"
-            android:textSize="20dp" />
+            android:text="Enviar Mensaje" />
 
         <Button
             android:id="@+id/messages"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/defaultBotton"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_weight="1"
-            android:text="Mensajes"
-            android:textSize="20dp" />
+            android:text="Mensajes" />
 
     </LinearLayout>
 
@@ -41,23 +35,17 @@
 
         <Button
             android:id="@+id/new_photos"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/defaultBotton"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_weight="1"
-            android:text="Fotos Nuevas"
-            android:textSize="20dp" />
+            android:text="Fotos Nuevas" />
 
         <Button
             android:id="@+id/album"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/defaultBotton"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_weight="1"
-            android:text="Album"
-            android:textSize="20dp" />
+            android:text="Album" />
 
     </LinearLayout>
 

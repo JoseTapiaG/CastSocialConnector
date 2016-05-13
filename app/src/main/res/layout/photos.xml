@@ -12,19 +12,13 @@
 
         <Button
             android:id="@+id/prev"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Prev"
-            android:textSize="20dp" />
+            style="@style/defaultBotton"
+            android:text="Prev" />
 
         <Button
             android:id="@+id/next"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Next"
-            android:textSize="20dp" />
+            style="@style/defaultBotton"
+            android:text="Next" />
 
     </LinearLayout>
 
