@@ -11,19 +11,27 @@
         android:layout_weight="2"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/send_message"
             style="@style/defaultBotton"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:text="Enviar Mensaje" />
+            android:src="@drawable/ic_enviar_mensaje"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:text="Enviar Mensaje"
+            android:padding="20dp" />
 
-        <Button
+        <ImageButton
             android:id="@+id/messages"
             style="@style/defaultBotton"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="Mensajes" />
+            android:src="@drawable/ic_mensajes_nuevos"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:text="Mensajes"
+            android:padding="30dp" />
 
     </LinearLayout>
 
@@ -33,19 +41,27 @@
         android:layout_weight="2"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/new_photos"
             style="@style/defaultBotton"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:text="Fotos Nuevas" />
+            android:src="@drawable/ic_fotos_nuevas"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:text="Fotos Nuevas"
+            android:padding="15dp" />
 
-        <Button
+        <ImageButton
             android:id="@+id/album"
             style="@style/defaultBotton"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:text="Album" />
+            android:src="@drawable/ic_album"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:text="Album"
+            android:padding="15dp" />
 
     </LinearLayout>
 

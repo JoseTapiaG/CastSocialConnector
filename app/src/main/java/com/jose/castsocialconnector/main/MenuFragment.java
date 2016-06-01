@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.gms.cast.Cast;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.jose.castsocialconnector.R;
 import com.jose.castsocialconnector.contacts.AlbumContactsFragment;
 import com.jose.castsocialconnector.contacts.SendMessageContactsFragment;
@@ -31,20 +34,20 @@ public class MenuFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.menu, container, false);
 
-        ((Button) view.findViewById(R.id.send_message)).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.send_message).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeFragment(new SendMessageContactsFragment());
             }
         });
-        ((Button) view.findViewById(R.id.messages)).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.messages).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                prev();
             }
         });
 
-        ((Button) view.findViewById(R.id.new_photos)).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.new_photos).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TransitionFragment fragment = new TransitionFragment();
@@ -53,7 +56,7 @@ public class MenuFragment extends BaseFragment {
             }
         });
 
-        ((Button) view.findViewById(R.id.album)).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.album).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeFragment(new AlbumContactsFragment());
@@ -70,6 +73,21 @@ public class MenuFragment extends BaseFragment {
         if(settings.getBoolean("menuTutorial", true)){
             MenuTutorial menuTutorial = new MenuTutorial(this);
             menuTutorial.start();
+        }
+
+        if (((MainActivity) getActivity()).getmApiClient() != null) {
+            try {
+                Cast.CastApi.sendMessage(((MainActivity) getActivity()).getmApiClient(),
+                        getString(R.string.home_namespace), ".").setResultCallback(
+                        new ResultCallback<Status>() {
+                            @Override
+                            public void onResult(Status result) {
+                                if (!result.isSuccess()) {
+                                }
+                            }
+                        });
+            } catch (Exception e) {
+            }
         }
     }
 

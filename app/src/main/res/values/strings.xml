@@ -28,7 +28,8 @@
     <string name="send_message_subject">[Social Connector] Nuevo mensaje</string>
     <string name="send_message">urn:x-cast:com.jose.cast.sample.send_message</string>
 
-
+    <!--Home-->
+    <string name="home_namespace">urn:x-cast:com.jose.cast.sample.home</string>
     <!--Contacts-->
     <string name="next_namespace">urn:x-cast:com.jose.cast.sample.next</string>
     <string name="prev_namespace">urn:x-cast:com.jose.cast.sample.prev</string>
