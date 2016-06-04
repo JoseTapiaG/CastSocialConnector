@@ -17,6 +17,7 @@ import com.google.android.gms.common.api.Status;
 import com.jose.castsocialconnector.R;
 import com.jose.castsocialconnector.contacts.AlbumContactsFragment;
 import com.jose.castsocialconnector.contacts.SendMessageContactsFragment;
+import com.jose.castsocialconnector.message.NewMessagesFragment;
 import com.jose.castsocialconnector.photo.NewPhotosFragment;
 import com.jose.castsocialconnector.tutorial.MenuTutorial;
 import com.jose.castsocialconnector.xml.XmlContact;
@@ -43,7 +44,7 @@ public class MenuFragment extends BaseFragment {
         view.findViewById(R.id.messages).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                prev();
+                changeFragment(new NewMessagesFragment());
             }
         });
 

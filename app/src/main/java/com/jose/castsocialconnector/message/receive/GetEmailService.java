@@ -77,6 +77,8 @@ public class GetEmailService implements MessageCountListener {
                         idleThread.setDaemon(false);
                         idleThread.start();
                     }
+
+                    cargarCorreos();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -128,7 +130,7 @@ public class GetEmailService implements MessageCountListener {
                     }
                     return null;
                 }
-            };
+            }.execute();
         }
     }
 
