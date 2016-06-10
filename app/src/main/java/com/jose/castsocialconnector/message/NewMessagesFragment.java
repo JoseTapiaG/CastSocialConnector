@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.cast.Cast;
 import com.google.android.gms.common.api.ResultCallback;
@@ -27,7 +28,11 @@ public class NewMessagesFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         emails = ((MainActivity) getActivity()).getGetEmailService().getEmails();
-        sendNewMessages();
+        if (emails.isEmpty()) {
+            Toast.makeText(getActivity(), "No hay mensajes nuevos para mostrar", Toast.LENGTH_SHORT).show();
+            changeFragment(new MenuFragment());
+        } else
+            sendNewMessages();
     }
 
     @Override

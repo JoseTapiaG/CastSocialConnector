@@ -5,6 +5,7 @@ import com.google.android.gms.cast.CastDevice;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.jose.castsocialconnector.R;
+import com.jose.castsocialconnector.config.Config;
 import com.jose.castsocialconnector.main.MainActivity;
 import com.jose.castsocialconnector.main.MenuFragment;
 import com.jose.castsocialconnector.main.TransitionFragment;
@@ -24,11 +25,14 @@ public class AlbumContactsFragment extends ContactsFragment {
 
     protected void filterContacts() {
         filteredContacts.clear();
-        for (XmlContact contact: MainActivity.xmlContacts) {
-            if (contact.getInstagram().compareTo("") != 0) {
-                filteredContacts.add(contact);
+        if (!Config.DEBUG) {
+            for (XmlContact contact : MainActivity.xmlContacts) {
+                if (contact.getInstagram().compareTo("") != 0) {
+                    filteredContacts.add(contact);
+                }
             }
-        }
+        } else
+            filteredContacts = MainActivity.xmlContacts;
     }
 
     @Override

@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.jose.castsocialconnector.R;
+import com.jose.castsocialconnector.config.Config;
 
 /**
  *
@@ -30,7 +31,9 @@ public class InstagramLogin extends Activity {
                 getApplicationContext().getString(R.string.instagram_token),
                 "");
 
-        if (auth_token_string.compareTo("") == 0) {
+        if (Config.DEBUG || auth_token_string.compareTo("") != 0) {
+            redirectToMainActivity();
+        } else {
             String instagramUrl = "https://instagram.com/oauth/authorize/?client_id=" +
                     getApplicationContext().getString(R.string.instagram_id) +
                     "&redirect_uri=" +
@@ -50,8 +53,6 @@ public class InstagramLogin extends Activity {
             });
             mWebview .loadUrl(instagramUrl);
             setContentView(mWebview );
-        } else {
-            redirectToMainActivity();
         }
     }
 

@@ -4,6 +4,7 @@ import android.os.StrictMode;
 import android.util.Log;
 
 import com.jose.castsocialconnector.R;
+import com.jose.castsocialconnector.config.Config;
 import com.jose.castsocialconnector.contacts.AlbumContactsFragment;
 import com.jose.castsocialconnector.main.MainActivity;
 import com.jose.castsocialconnector.xml.XmlContact;
@@ -30,27 +31,30 @@ public class AlbumPhotosFragment extends PhotosFragment {
 
     @Override
     protected ArrayList<PhotoJSON> getPhotos() {
-        contacto = ((MainActivity) getActivity()).currentContact;
+        if (!Config.DEBUG) {
+            contacto = ((MainActivity) getActivity()).currentContact;
 
-        URL = "https://api.instagram.com/v1/users/" + contacto.getInstagramUser().getId() + "/media/recent/"
-                + "?access_token=" + MainActivity.instagramToken;
+            URL = "https://api.instagram.com/v1/users/" + contacto.getInstagramUser().getId() + "/media/recent/"
+                    + "?access_token=" + MainActivity.instagramToken;
 
-        //todo buscar mejor forma de manejar asynctask
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+            //todo buscar mejor forma de manejar asynctask
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
 
-        try {
-            java.net.URL url = new URL(URL);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
-            if (inputStream != null) {
-                return processGetUserPhotos(convertInputStreamToString(inputStream));
+            try {
+                java.net.URL url = new URL(URL);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+                if (inputStream != null) {
+                    return processGetUserPhotos(convertInputStreamToString(inputStream));
+                }
+            } catch (Exception e) {
+                Log.d("InputStream", e.getLocalizedMessage());
             }
-        } catch (Exception e) {
-            Log.d("InputStream", e.getLocalizedMessage());
-        }
 
-        return new ArrayList<>();
+            return new ArrayList<>();
+        } else
+            return getDebugPhotos();
     }
 
 
@@ -87,5 +91,57 @@ public class AlbumPhotosFragment extends PhotosFragment {
     @Override
     protected void onBackPressed() {
         changeFragment(new AlbumContactsFragment());
+    }
+
+    public ArrayList<PhotoJSON> getDebugPhotos() {
+        ArrayList<PhotoJSON> photos = new ArrayList<>();
+        contacto = ((MainActivity) getActivity()).currentContact;
+        PhotoJSON photoJSON;
+
+        if (contacto.getNickname().equals("Natalia")) {
+            photoJSON = new PhotoJSON();
+            photoJSON.setCaption("A financiar el paseo");
+            photoJSON.setId("1");
+            photoJSON.setHighResUrl("http://www.infolibre.es/uploads/imagenes/bajacalidad/2013/10/07/_mcdonalds_02470215.jpg");
+            photoJSON.setNickname("Natalia");
+            photos.add(photoJSON);
+
+            photoJSON = new PhotoJSON();
+            photoJSON.setCaption("Que ricas vacaciones");
+            photoJSON.setId("2");
+            photoJSON.setHighResUrl("http://www.datoexpress.cl/wp-content/uploads/2016/01/vacaciones.jpg");
+            photoJSON.setNickname("Natalia");
+            photos.add(photoJSON);
+            return photos;
+        } else if (contacto.getNickname().equals("Javiera")) {
+            photoJSON = new PhotoJSON();
+            photoJSON.setId("1");
+            photoJSON.setCaption("Ultima prueba, vamos que se puede!!");
+            photoJSON.setHighResUrl("http://ambitodelaeducacion.com/wp-content/uploads/2016/03/0116.jpg");
+            photoJSON.setNickname("Javiera");
+            photos.add(photoJSON);
+
+            photoJSON = new PhotoJSON();
+            photoJSON.setCaption("Al fin graduada");
+            photoJSON.setId("2");
+            photoJSON.setHighResUrl("http://memoryfilm.mx/img/graduacion1.jpg");
+            photoJSON.setNickname("Javiera");
+            photos.add(photoJSON);
+        } else if (contacto.getNickname().equals("Victor")) {
+            photoJSON = new PhotoJSON();
+            photoJSON.setCaption("Una rica cena familiar");
+            photoJSON.setId("3");
+            photoJSON.setHighResUrl("http://www.kazikes.es/wp-content/uploads/2015/12/cena-familiar4.jpg");
+            photoJSON.setNickname("Victor");
+            photos.add(photoJSON);
+        } else if (contacto.getNickname().equals("Luis")) {
+            photoJSON = new PhotoJSON();
+            photoJSON.setCaption("Muy buen concierto, feliz :D");
+            photoJSON.setId("4");
+            photoJSON.setHighResUrl("http://www.fmdos.cl/wp-content/uploads/2015/03/CONCIERTOS.jpg");
+            photoJSON.setNickname("Luis");
+            photos.add(photoJSON);
+        }
+        return photos;
     }
 }

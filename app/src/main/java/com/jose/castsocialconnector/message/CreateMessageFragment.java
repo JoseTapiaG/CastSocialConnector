@@ -17,6 +17,7 @@ import com.jose.castsocialconnector.R;
 import com.jose.castsocialconnector.contacts.SendMessageContactsFragment;
 import com.jose.castsocialconnector.main.BaseFragment;
 import com.jose.castsocialconnector.main.MainActivity;
+import com.jose.castsocialconnector.main.MenuFragment;
 
 import java.util.ArrayList;
 
@@ -100,6 +101,7 @@ public class CreateMessageFragment extends BaseFragment {
                             @Override
                             public void onResult(Status result) {
                                 if (result.isSuccess()) {
+                                    changeFragment(new MenuFragment());
                                 }
                             }
                         });
