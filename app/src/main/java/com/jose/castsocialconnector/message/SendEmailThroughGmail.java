@@ -1,16 +1,12 @@
 package com.jose.castsocialconnector.message;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.jose.castsocialconnector.R;
 import com.jose.castsocialconnector.main.MainActivity;
 import com.jose.castsocialconnector.message.authentication.OAuth2Authenticator;
-
-import java.util.Calendar;
 
 /**
  * Created with IntelliJ IDEA.
